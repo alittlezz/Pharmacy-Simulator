@@ -82,6 +82,10 @@ void *QtUI::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_QtUI.stringdata0))
         return static_cast<void*>(this);
+    if (!strcmp(_clname, "ObservableCart"))
+        return static_cast< ObservableCart*>(this);
+    if (!strcmp(_clname, "ObserverCart"))
+        return static_cast< ObserverCart*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
@@ -298,6 +302,152 @@ void *FilterUI::qt_metacast(const char *_clname)
 int FilterUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QDialog::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_CartCRUDGUI_t {
+    QByteArrayData data[1];
+    char stringdata0[12];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_CartCRUDGUI_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_CartCRUDGUI_t qt_meta_stringdata_CartCRUDGUI = {
+    {
+QT_MOC_LITERAL(0, 0, 11) // "CartCRUDGUI"
+
+    },
+    "CartCRUDGUI"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_CartCRUDGUI[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void CartCRUDGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject CartCRUDGUI::staticMetaObject = { {
+    &QWidget::staticMetaObject,
+    qt_meta_stringdata_CartCRUDGUI.data,
+    qt_meta_data_CartCRUDGUI,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *CartCRUDGUI::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *CartCRUDGUI::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_CartCRUDGUI.stringdata0))
+        return static_cast<void*>(this);
+    if (!strcmp(_clname, "ObserverCart"))
+        return static_cast< ObserverCart*>(this);
+    if (!strcmp(_clname, "ObservableCart"))
+        return static_cast< ObservableCart*>(this);
+    return QWidget::qt_metacast(_clname);
+}
+
+int CartCRUDGUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_CartReadOnlyGUI_t {
+    QByteArrayData data[1];
+    char stringdata0[16];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_CartReadOnlyGUI_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_CartReadOnlyGUI_t qt_meta_stringdata_CartReadOnlyGUI = {
+    {
+QT_MOC_LITERAL(0, 0, 15) // "CartReadOnlyGUI"
+
+    },
+    "CartReadOnlyGUI"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_CartReadOnlyGUI[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void CartReadOnlyGUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject CartReadOnlyGUI::staticMetaObject = { {
+    &QWidget::staticMetaObject,
+    qt_meta_stringdata_CartReadOnlyGUI.data,
+    qt_meta_data_CartReadOnlyGUI,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *CartReadOnlyGUI::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *CartReadOnlyGUI::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_CartReadOnlyGUI.stringdata0))
+        return static_cast<void*>(this);
+    if (!strcmp(_clname, "ObserverCart"))
+        return static_cast< ObserverCart*>(this);
+    return QWidget::qt_metacast(_clname);
+}
+
+int CartReadOnlyGUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

@@ -110,6 +110,5 @@ int main(int argc, char **argv) {
 	//testAll<LinkedList<Pet>>();
 	start_app(argc, argv);
 	//_CrtDumpMemoryLeaks();
-	//QApplication a(argc, argv);
 	return 0;
 }

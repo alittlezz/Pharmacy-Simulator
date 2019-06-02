@@ -7,8 +7,17 @@ QtUI::QtUI(shared_ptr <Repository> _repo, QWidget *parent) : QWidget(parent), se
 	connect();
 }
 
+QtUI::~QtUI(){
+}
+
 void QtUI::run(){
 	this->show();
+}
+
+void QtUI::update(const LinkedList <Medicine> &medicines){
+	service_cart.populate(service.get_n_random(medicines.get_size()));
+	show_lst_cart();
+	notify(service_cart.get_all());
 }
 
 void QtUI::init(){
@@ -54,6 +63,13 @@ void QtUI::init(){
 
 	cart_menu->addLayout(cart_buttons);
 	layout->addLayout(cart_menu);
+
+	QHBoxLayout *cart_buttons_GUI = new QHBoxLayout(this);
+	cart_buttons_GUI->addWidget(cart_GUI_button);
+	cart_buttons_GUI->addWidget(cart_RO_GUI_button);
+
+	layout->addLayout(cart_buttons_GUI);
+
 	layout->addWidget(close_button);
 	layout->addWidget(footer);
 }
@@ -257,11 +273,15 @@ void QtUI::connect(){
 		service_cart.add(service.find(name.toStdString()));
 		show_lst_cart();
 
+		this->notify(service_cart.get_all());
+
 		this->set_message("S-a adaugat medicamentul " + name);
 	});
 	QObject::connect(empty_cart_button, &QPushButton::clicked, [this](){
 		service_cart.empty();
 		show_lst_cart();
+
+		this->notify(service_cart.get_all());
 
 		this->set_message("S-a golit cosul");
 	});
@@ -278,11 +298,21 @@ void QtUI::connect(){
 		service_cart.populate(medicines);
 		show_lst_cart();
 
+		this->notify(service_cart.get_all());
+
 		this->set_message("S-au generat " + text + " medicamente in cos");
 	});
 	QObject::connect(save_cart_button, &QPushButton::clicked, [this](){
 		service_cart.save_to_file();
 		this->set_message("S-a salvat cosul in fisier");
+	});
+	QObject::connect(cart_GUI_button, &QPushButton::clicked, [this](){
+		ObserverCart* nw_window = new CartCRUDGUI(this->service_cart.get_all(), this);
+		addObserver(nw_window);
+	});
+	QObject::connect(cart_RO_GUI_button, &QPushButton::clicked, [this]() {
+		ObserverCart* nw_window = new CartReadOnlyGUI(this->service_cart.get_all());
+		addObserver(nw_window);
 	});
 }
 
@@ -376,4 +406,69 @@ void FilterUI::connect() {
 
 QString FilterUI::get_text() const{
 	return text->toPlainText();
+}
+
+CartCRUDGUI::CartCRUDGUI(const LinkedList <Medicine> &medicines, ObserverCart* obs, QWidget *parent) : QWidget(parent) {
+	update(medicines);
+	addObserver(obs);
+	init();
+	connect();
+}
+
+void CartCRUDGUI::init() {
+	layout->addWidget(lst);
+	layout->addWidget(generate_button);
+	this->show();
+}
+
+void CartCRUDGUI::connect() {
+	QObject::connect(generate_button, &QPushButton::clicked, [this](){
+		FilterUI dialog(this);
+		if (dialog.exec() == QDialog::Rejected) {
+			return;
+		}
+
+		QString text = dialog.get_text();
+		int nr = text.toInt();
+
+		LinkedList <Medicine> aux;
+		for(int i = 0;i < nr;i++)
+		{
+			aux.append(Medicine("a"));
+		}
+		notify(aux);
+	});
+}
+
+void CartCRUDGUI::update(const LinkedList <Medicine> &medicines) {
+	lst->clear();
+	QStringList cr_lst;
+	for (const auto &medicine : medicines) {
+		cr_lst << QString::fromStdString(medicine.get_name());
+	}
+	lst->addItems(cr_lst);
+	lst->clearSelection();
+}
+
+CartReadOnlyGUI::CartReadOnlyGUI(const LinkedList <Medicine> &medicines, QWidget *parent) : QWidget(Q_NULLPTR){
+	this->show();
+	update(medicines);
+}
+
+void CartReadOnlyGUI::paintEvent(QPaintEvent *ev){
+	QPainter canvas(this);
+	std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+	std::uniform_int_distribution<int> rndx(0, this->width() - 30);
+	std::uniform_int_distribution<int> rndy(0, this->height() - 30);
+	for (int i = 0; i < no_shapes; i++) {
+		int x = rndx(rng);
+		int y = rndy(rng);
+		QRect rect(x, y, 30, 30);
+		canvas.drawRect(rect);
+	}
+}
+
+void CartReadOnlyGUI::update(const LinkedList <Medicine> &medicines) {
+	no_shapes = medicines.get_size();
+	repaint();
 }
