@@ -5,6 +5,7 @@
 #include "Service.h"
 #include "ServiceCart.h"
 #include "Observer.h"
+#include "MyTableModel.h"
 
 class QtUI : public QWidget, public ObservableCart, public ObserverCart{
 	Q_OBJECT
@@ -53,6 +54,9 @@ private:
 	QPushButton *cart_GUI_button = new QPushButton("Add a new CRUD cart GUI", this);
 	QPushButton *cart_RO_GUI_button = new QPushButton("Add a new ReadOnly cart GUI", this);
 	vector <unique_ptr<QWidget>> cart_GUIs;
+
+	MyTableModel *mdl = new MyTableModel();
+	QTableView *tbl = new QTableView(this);
 
 	QLabel *footer = new QLabel(this);
 };

@@ -1,5 +1,6 @@
 #include "QtUI.h"
 #include "test_service_cart.h"
+#include "MyTableModel.h"
 
 
 QtUI::QtUI(shared_ptr <Repository> _repo, QWidget *parent) : QWidget(parent), service(_repo){
@@ -20,8 +21,8 @@ void QtUI::update(const LinkedList <Medicine> &medicines){
 	notify(service_cart.get_all());
 }
 
-void QtUI::init(){
-	QHBoxLayout *big_menu= new QHBoxLayout(this);
+void QtUI::init() {
+	QHBoxLayout *big_menu = new QHBoxLayout(this);
 
 	big_menu->addWidget(table);
 	show_lst();
@@ -71,6 +72,8 @@ void QtUI::init(){
 	layout->addLayout(cart_buttons_GUI);
 
 	layout->addWidget(close_button);
+	tbl->setModel(mdl);
+	layout->addWidget(tbl);
 	layout->addWidget(footer);
 }
 
@@ -89,6 +92,7 @@ void QtUI::set_medicine(int idx, const Medicine &medicine) {
 void QtUI::show_lst(){
 	clear_lst();
 	const LinkedList <Medicine> &medicines = service.get_all();
+	mdl->set_medicines(medicines);
 	table->setRowCount(medicines.get_size());
 	table->setColumnCount(5);
 	for (int i = 0; i < medicines.get_size();i++) {
@@ -112,6 +116,7 @@ void QtUI::show_lst_cart() {
 
 void QtUI::update_lst(const LinkedList <Medicine> &medicines){
 	clear_lst();
+	mdl->set_medicines(medicines);
 	table->setRowCount(medicines.get_size());
 	table->setColumnCount(5);
 	for (int i = 0; i < medicines.get_size(); i++) {

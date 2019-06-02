@@ -118,6 +118,7 @@
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Medicine.cpp" />
+    <ClCompile Include="MyTableModel.cpp" />
     <ClCompile Include="my_utility.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Pet.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="exceptions.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Medicine.h" />
+    <QtMoc Include="MyTableModel.h" />
     <ClInclude Include="my_utility.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Pet.h" />

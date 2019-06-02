@@ -58,6 +58,9 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyTableModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resource Files">
@@ -136,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="QtUI.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="MyTableModel.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
